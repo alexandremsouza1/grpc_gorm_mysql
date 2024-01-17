@@ -1,0 +1,36 @@
+version: '3'
+services:
+  # server:
+  #   build:
+  #     context: .
+  #     target: final
+  #   ports:
+  #     - 5000:5000
+  protoc:
+    image: ghcr.io/tk42/protoc
+    volumes:
+      - ./proto:/tmp/proto
+    working_dir: "/tmp"
+    command:
+      - "sh"
+      - "-c"
+      - "protoc -I /tmp/proto \
+         --go_out /tmp/proto --go_opt paths=source_relative \
+         --go-grpc_out /tmp/proto --go-grpc_opt paths=source_relative \
+         --grpc-gateway_out /tmp/proto --grpc-gateway_opt paths=source_relative \
+         /tmp/proto/*.proto"
+  db:
+      image: mysql:8.0
+      ports:
+          - "3306:3306"
+      command: --default-authentication-plugin=mysql_native_password
+      environment:
+          MYSQL_DATABASE: test
+          MYSQL_USER: user
+          MYSQL_PASSWORD: password
+          MYSQL_ROOT_PASSWORD: Hanuman1998
+      volumes:
+          - ./docker:/etc/mysql/conf.d
+          - db-data:/var/lib/mysql
+volumes:
+  db-data:
