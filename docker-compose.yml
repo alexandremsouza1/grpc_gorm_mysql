@@ -14,11 +14,10 @@ services:
     command:
       - "sh"
       - "-c"
-      - "protoc -I /tmp/proto \
-         --go_out /tmp/proto --go_opt paths=source_relative \
-         --go-grpc_out /tmp/proto --go-grpc_opt paths=source_relative \
-         --grpc-gateway_out /tmp/proto --grpc-gateway_opt paths=source_relative \
-         /tmp/proto/*.proto"
+      - "find /tmp/proto -name '*.proto' -print0 | xargs -0 protoc -I /tmp/proto \
+        --go_out /tmp/proto --go_opt paths=source_relative \
+        --go-grpc_out /tmp/proto --go-grpc_opt paths=source_relative \
+        --grpc-gateway_out /tmp/proto --grpc-gateway_opt paths=source_relative"
   db:
       image: mysql:8.0
       ports:
