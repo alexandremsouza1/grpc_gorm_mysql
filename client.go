@@ -9,7 +9,7 @@ import (
 	pb "grpc-gorm-mysql/proto/food"
 )
 
-const address = "127.0.0.1.8080"
+const address = "localhost:8080"
 
 func main() {
 
@@ -45,13 +45,12 @@ loop:
 
 		case "2":
 			fmt.Printf("Please enter the data: \n")
-			var id int32
 			var name string
 			var price float32
 			var typeId int32
 			var createTime int64
-			fmt.Scanf("%d %s %f %d %d", &id, &name, &price, &typeId, &createTime)
-			result, err = c.Insert(context.Background(), &pb.InsDelUpdRequest{Id: id, Name: name, Price: price, TypeId: typeId, CreateTime: createTime})
+			fmt.Scanf("%s %f %d %d",&name, &price, &typeId, &createTime)
+			result, err = c.Insert(context.Background(), &pb.InsDelUpdRequest{Name: name, Price: price, TypeId: typeId, CreateTime: createTime})
 
 		case "3":
 			fmt.Printf("Please enter the data: \n")
