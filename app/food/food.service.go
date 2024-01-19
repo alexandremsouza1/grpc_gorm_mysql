@@ -1,16 +1,16 @@
 package food
 
 import (
-	"fmt"
 	"context"
+	"fmt"
 
-	pb "grpc-gorm-mysql/proto"
+	pb "grpc-gorm-mysql/proto/food"
 )
 
 type MyServer struct {
+	pb.UnimplementedOperationServer
 	FoodRepo *FoodRepository
 }
-
 
 func (m *MyServer) Insert(ctx context.Context, in *pb.InsDelUpdRequest) (*pb.Reply, error) {
 	food := Food{
@@ -25,7 +25,6 @@ func (m *MyServer) Insert(ctx context.Context, in *pb.InsDelUpdRequest) (*pb.Rep
 	m.FoodRepo.Insert(food)
 	return &pb.Reply{Result: "Insert completed."}, nil
 }
-
 
 func (m *MyServer) Delete(ctx context.Context, in *pb.InsDelUpdRequest) (*pb.Reply, error) {
 	food := Food{

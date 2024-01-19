@@ -6,13 +6,12 @@ import (
 
 	"grpc-gorm-mysql/app/food"
 	"grpc-gorm-mysql/mysql"
-	pb "grpc-gorm-mysql/proto"
+	pb "grpc-gorm-mysql/proto/food"
 
 	"google.golang.org/grpc"
 )
 
 const port = ":8080"
-
 
 func main() {
 	list, err := net.Listen("tcp", port)

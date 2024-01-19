@@ -6,7 +6,7 @@ import (
 
 	"google.golang.org/grpc"
 
-	pb "grpc-gorm-mysql/proto"
+	pb "grpc-gorm-mysql/proto/food"
 )
 
 const address = "127.0.0.1.8080"
@@ -41,7 +41,7 @@ loop:
 			fmt.Println("enter the condition: ")
 			var con string
 			fmt.Scanln(&con)
-			result, err = c.Select(context.Background(), &pb.SelectRequest{Columns: columns, Table: table, Condition: con})
+			//result, err = c.Select(context.Background(), &pb.SelectRequest{Columns: columns, Table: table, Condition: con})
 
 		case "2":
 			fmt.Printf("Please enter the data: \n")

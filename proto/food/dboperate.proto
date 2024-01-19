@@ -2,6 +2,10 @@ syntax = "proto3";
 
 package proto;
 
+
+option go_package = "grpc-gorm-mysql/food/proto";
+
+
 service Operation {
     rpc insert(insDelUpdRequest) returns (reply) {}
     rpc delete(insDelUpdRequest) returns (reply) {}
